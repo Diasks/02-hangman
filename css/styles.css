@@ -7,7 +7,7 @@
 }
 
 body {
-  color: #666;
+  color: #666; 
   font-family: sans-serif;
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,7 +24,8 @@ body {
 
 header {
   background-color: silver;
-  color: #fff;
+  /* color: #fff; */ color: black;
+  border-bottom: 1px solid #666;
   -webkit-box-flex: 0;
   -webkit-flex: none;
   -ms-flex: none;
@@ -67,8 +68,12 @@ main > article > button {
 
 main > article > h2 {
   text-align: center;
-  color: #777;
+  color: black;
   margin-bottom: 1.5em;
+}
+
+p {
+  color: black;
 }
 
 ul {
@@ -80,7 +85,7 @@ footer {
   border-top: 1px solid #666;
   margin-top: 20px;
   padding-top: 30px;
-  color: #fff;
+  /* color: #fff; */ color: black;
   font-size: 1.25em;
   width: 100%;
   flex: none;
@@ -115,7 +120,7 @@ footer {
 }
 
 #letterBoxes input {
-  border: 1px solid #666;
+  border: 1px solid black;
   color: #666;
   font-size: 1.5em;
   font-weight: bold;
@@ -137,7 +142,7 @@ footer {
   background: transparent;
   border-radius: 6px;
   border: 0;
-  border: 2px solid #666;
+  border: 2px solid black;
   color: #666;
   cursor: pointer;
   display: block;

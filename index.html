@@ -8,11 +8,11 @@
 </head>
 
 <body>
-    <header>
+    <header role="banner">
         <h1>Uppgift 05 - Hangman</h1>
     </header>
-    <main>
-        <article>
+    <main role="main">
+        <article role="article">
             <h2>Välkommen till spelet Hänga gubbe.</h2>
             <p>När du trycker på starta spelet, kommer datorn att välja ett ord slumpmässigt. <br/>
                Det kommer då dyka upp ett visst antal fält som motsvarar antalet bokstäver i ordet. <br/> 
@@ -45,7 +45,7 @@
                 <li><button class="btn btn--stripe" type="button" value="Q">Q</button></li>
                 <li><button class="btn btn--stripe" type="button" value="R">R</button></li>
                 <li><button class="btn btn--stripe" type="button" value="S">S</button></li>
-                <li><button class="btn btn--stripe" type="button" value="T" disabled>T</button></li>
+                <li><button class="btn btn--stripe" type="button" value="T" >T</button></li>
                 <li><button class="btn btn--stripe" type="button" value="U">U</button></li>
                 <li><button class="btn btn--stripe" type="button" value="V">V</button></li>
                 <li><button class="btn btn--stripe" type="button" value="W">W</button></li>
@@ -57,24 +57,20 @@
                 <li><button class="btn btn--stripe" type="button" value="Ö">Ö</button></li>
             </ul>
             <section id="letterBoxes">
-                <!-- This is where the matched letters should appear, these should match the number of -->
-                <ul>
-                    <li><input type="text" disabled value="" /></li>
-                    <li><input type="text" disabled value="" /></li>
-                    <li><input type="text" disabled value="" /></li>
-                    <li><input type="text" disabled value="" /></li>
-                    <li><input type="text" disabled value=""  /></li>
-                    <li><input type="text" disabled value=""  /></li>
+                
+                <ul id="letterUL">
+                
                 </ul>
             </section>
             <img id="hangman" src="images/h0.png" alt="hangman">
            
-        </section>
-        <section id="message">
-            <!-- This is where messages should appear -->
+        </section> 
+        <div id="placeholders"> </div>
+         <section id="message">
+           
         </section>
     </main>
-    <footer>
+    <footer role="contentinfo">
         Chas Academy - Hangman
     </footer>
     <script type="text/javascript" src="js/script.js"></script>
