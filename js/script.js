@@ -17,17 +17,17 @@ let startTime; // Mäter tiden
 
 
 
-
+window.onload = init; 
 
 // Funktion som slumpar fram ett ord
 
 // Funktion som körs då hela webbsidan är inladdad, dvs då all HTML-kod är utförd
 // Initiering av globala variabler samt koppling av funktioner till knapparna.
 function init() {
-    console.log(init);
-} // End init
+  
 
-window.onload = init; // Se till att init aktiveras då sidan är inladdad
+
+// Se till att init aktiveras då sidan är inladdad
 
 // När man klickar på knappen starta spel så anropas funktionen startTheGame
 startGameBtn = document.getElementById("startGameBtn");
@@ -41,7 +41,7 @@ function startTheGame() {
     createInput();
     console.log(selectedWord);
 
-}
+}} // End init
 
 
 // Funktionen som tar fram bokstävernas rutor, antal beror på vilket ord

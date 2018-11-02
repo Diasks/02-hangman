@@ -24,7 +24,7 @@ body {
 
 header {
   background-color: silver;
-  /* color: #fff; */ color: black;
+  color: black;
   border-bottom: 1px solid #666;
   -webkit-box-flex: 0;
   -webkit-flex: none;
@@ -85,7 +85,7 @@ footer {
   border-top: 1px solid #666;
   margin-top: 20px;
   padding-top: 30px;
-  /* color: #fff; */ color: black;
+  color: black;
   font-size: 1.25em;
   width: 100%;
   flex: none;
