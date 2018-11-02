@@ -15,21 +15,22 @@
     <main role="main">
         <article role="article">
             <h2>Välkommen till spelet Hänga gubbe.</h2>
-            <p>När du trycker på starta spelet, kommer datorn att välja ett ord slumpmässigt. <br/>
-               Det kommer då dyka upp ett visst antal fält som motsvarar antalet bokstäver i ordet. <br/> 
-               Ditt mål är att gissa ordet genom att trycka på bokstavsknapparna.<br/>
-               För varje bokstav du gissar rätt, så fylls dyker det upp en bokstav i på den plats som bokstaven du gissade på motsvarar i ordet.
+            <p>När du trycker på starta spelet, kommer datorn att välja ett ord slumpmässigt. 
+               Det kommer då dyka upp ett visst antal fält som motsvarar antalet bokstäver i ordet.  
+               Ditt mål är att gissa ordet genom att trycka på bokstavsknapparna.
+               För varje bokstav du gissar rätt, så dyker det upp en bokstav på den plats som bokstaven du gissade på motsvarar i ordet. Du har 6 felgissningar på dig!
             </p>
-            <ul>
+            <!-- <ul>
                 <li>Övriga regler</li>
-            </ul>
+                <li>Du har 6 felgissningar på dig!</li>
+            </ul> -->
         </article>
         <button class="btn btn--stripe" type="button" id="startGameBtn">Starta spelet</button>
         <section id="gameBoard">
             <ul id="letterButtons">
-                <li><button class="btn btn--stripe" type="button" value="A">A</button></li>
-                <li><button class="btn btn--stripe" type="button" value="B">B</button></li>
-                <li><button class="btn btn--stripe" type="button" value="C">C</button></li>
+                <li><button class="btn btn--stripe" id="btnRemove" type="button" value="A">A</button></li>
+                <li><button class="btn btn--stripe" id="btnRemove" type="button" value="B">B</button></li>
+                <li><button class="btn btn--stripe" id="btnRemove" type="button" value="C">C</button></li>
                 <li><button class="btn btn--stripe" type="button" value="D">D</button></li>
                 <li><button class="btn btn--stripe" type="button" value="E">E</button></li>
                 <li><button class="btn btn--stripe" type="button" value="F">F</button></li>

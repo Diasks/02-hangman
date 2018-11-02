@@ -1,6 +1,6 @@
 // Globala variabler
 // Lista med spelets alla ord
-const wordList = ["Sol", "Träd", "Bänk", "Stol", "Knivig", "Busig", "Polis", "Gris", "Vegan", "Bil", "Rally", "Fralla", "Spring", "Regn"]; 
+const wordList = ["Sol", "Träd", "Bänk", "Stol", "Knepig", "Busig", "Polis", "Gris", "Vegan", "Bil", "Piano", "Slöja", "Spring", "Regn"]; 
 // Ett av orden valt av en slumpgenerator
 let selectedWord =  wordList[Math.floor(Math.random() * wordList.length)].toUpperCase(); 
 //lägger valt ord i en array och splittrar ordet så det blir separata bokstäver.
@@ -50,7 +50,7 @@ function createInput() {
    
     for (let i = 0; i < arrSelectedWord.length; i++){
         letterBoxes[i] = document.createElement("li");
-        letterBoxes[i].innerHTML = `<input type="text" disabled value="" class="list" />` 
+        letterBoxes[i].innerHTML = `<input type="text" disabled value="" />` 
                     
             document.getElementById("letterUL").appendChild(letterBoxes[i]);
            
@@ -63,7 +63,6 @@ function createInput() {
 let liInputElem = document.querySelectorAll('value');
 
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
-        // document.getElementById("letterButtons").addEventListener('click', function buttonValue() 
         function buttonValue(){
     //lägger value av vald knapp i letterButton och disable:ar vald boktav efter det.
              letterButton = event.target.value;
@@ -71,13 +70,15 @@ let liInputElem = document.querySelectorAll('value');
          //om letterButton finns i arrayen med valda ordet = true
                 if(arrSelectedWord.indexOf(letterButton) !== -1) {
                  //vill slå ihop min node-lista och min listarray...
-                    liInputElem = letterBoxes.join('');
+                    liInputElem.value = letterBoxes;
+                    liInputElem.textContent = letterBoxes;
+                    liInputElem.innerHTML = letterBoxes;
                     //var i ordet bokstaven finns där lägger den in bokstaven.
               letterBoxes[arrSelectedWord.indexOf(letterButton)] = letterButton;
              //om mina listelement när man slår ihop bokstäverna är det valda ordet så har personen vunnit!
               if (letterBoxes.join('') == selectedWord) {
+                removeButton ();
                 document.getElementById("message").textContent="Du har vunnit!" + " " + "ordet var: " + selectedWord;
-                //stäng av alla knapparna... typ remove eventhandler?
               }     
               //räknar ner antalet bokstäver kvar
               lettersLeft--;
@@ -93,6 +94,7 @@ let liInputElem = document.querySelectorAll('value');
     document.getElementById("placeholders").innerHTML+=letterButton;
     //om man har gissat fel 6 gånger skriv ett meddelande om att man har dött och vilket det rätta ordet var
     if( hangmanImgNr == 6) {
+        removeButton ();
         document.getElementById("message").textContent="Du har dött!" + " " + "ordet var: " + selectedWord;
     }
     
@@ -102,7 +104,15 @@ let liInputElem = document.querySelectorAll('value');
 }
   
 
+// Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
+     function removeButton () {
+        let removeButton = document.getElementsByClassName("btn btn--stripe");        
+        for (var j = 0; j < removeButton.length; j++) { 
+            removeButton[j].disabled = true;
+        }
      
+
+     }
     
 
 
@@ -124,7 +134,7 @@ let liInputElem = document.querySelectorAll('value');
 
 
 
-// Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
+
 
 
  
