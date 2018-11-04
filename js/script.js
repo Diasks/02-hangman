@@ -41,7 +41,7 @@ function init() {
   startGameBtn.addEventListener("click", startTheGame);
 
   //funktionen startTheGame som i sin tur anropar funktionen ButtonValue och CreateInput.
-  function startTheGame() {
+  function startTheGame(event) {
     event.target.disabled = true;
     let alpaButton = document.getElementById("letterButtons");
     alpaButton.addEventListener("click", buttonValue);
@@ -63,13 +63,13 @@ function createInput() {
 //ligger efter hela tiden och visar inte bokstav......
 
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
-function buttonValue() {
+function buttonValue(event) {
   //lägger value av vald knapp i letterButton och disable:ar vald boktav efter det.
   letterButton = event.target.value;
   event.target.disabled = true;
   //om letterButton finns i arrayen med valda ordet = true
   if (arrSelectedWord.indexOf(letterButton) !== -1) {
-    //vill slå ihop min node-lista och min listarray...
+   //SKRIV UT BOKSTAVEEEEN I DE SKAPADE LETTERBOXES!!!
 
     letterBoxes.innerHTML = letterButton;
     letterBoxes.innerText = letterButton;
