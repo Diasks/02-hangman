@@ -1,4 +1,3 @@
-// Globala variabler
 // Lista med spelets alla ord
 const wordList = [
   "Sol",
@@ -23,15 +22,15 @@ let selectedWord = wordList[
 //lägger valt ord i en array och splittrar ordet så det blir separata bokstäver.
 let arrSelectedWord = [];
 arrSelectedWord = selectedWord.split("");
-let letterBoxes = []; //Rutorna där bokstäverna ska stå
+//Array bestående av rutorna där bokstäverna ska stå
+let letterBoxes = []; 
 //mitt html-element där bilden ligger - Bild som kommer vid fel svar
 let hangmanImg = document.getElementById("hangman");
-let hangmanImgNr = 0; //Börjar på 0 och räknas upp för varje fel bokstav // Vilken av bilderna som kommer upp beroende på hur många fel du gjort
-let msgElem;
-let startGameBtn; // Knappen du startar spelet med
-let startTime; // Mäter tiden
+ //Börjar på 0 och räknas upp för varje fel bokstav // Vilken av bilderna som kommer upp beroende på hur många fel du gjort
+let hangmanImgNr = 0;
+// Knappen du startar spelet med
+let startGameBtn; 
 window.onload = init;
-// Funktion som slumpar fram ett ord
 // Funktion som körs då hela webbsidan är inladdad, dvs då all HTML-kod är utförd
 // Initiering av globala variabler samt koppling av funktioner till knapparna.
 function init() {
@@ -47,8 +46,8 @@ function init() {
     alpaButton.addEventListener("click", buttonValue);
     createInput();
     console.log(selectedWord);
-  }
-} // End init
+  };
+}; // End init
 
 // Funktionen som tar fram bokstävernas rutor, antal beror på vilket ord
 //skapa li-element där antalet rutor är beroende på längden av slumpat ord
@@ -58,7 +57,7 @@ function createInput() {
     letterBoxes[i].innerHTML = `<input type="text" disabled value="" />`;
     document.getElementById("letterUL").appendChild(letterBoxes[i]);
   }
-}
+};
 //vill ha tag i mina inputs för att ändra value till vald bokstav.....
 //ligger efter hela tiden och visar inte bokstav......
 
@@ -82,7 +81,7 @@ function buttonValue(event) {
     if (letterBoxes.join("") == selectedWord) {
       removeButton();
       document.getElementById("message").textContent =
-        "Du har vunnit!" + " " + "ordet var: " + selectedWord;
+        `Du har vunnit! Ordet var: ${selectedWord}`;
       setTimeout(ActivateStart, 3000);
     }
   } //finns bokstaven inte i arrayen med valda ordet = true
@@ -99,20 +98,20 @@ function buttonValue(event) {
       setTimeout(ActivateStart, 3000);
 
       document.getElementById("message").textContent =
-        "Du har dött!" + " " + "ordet var: " + selectedWord;
+        `Du är hängd! Ordet var: ${selectedWord}.`;
     }
     console.log("finns inte!");
   }
-}
+};
 // Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
 function removeButton() {
   let removeButton = document.getElementsByClassName("btn btn--stripe");
   for (var j = 0; j < removeButton.length; j++) {
     removeButton[j].disabled = true;
   }
-}
+};
 // Funktionen ropas vid vinst eller förlust, gör olika saker beroende av det
 
 function ActivateStart() {
   location.reload();
-}
+};
