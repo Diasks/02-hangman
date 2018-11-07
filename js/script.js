@@ -21,9 +21,9 @@ let selectedWord;
 let letterBoxes = [];
 //Mitt html-element där bilden ligger, bilden som kommer vid fel svar
 let hangmanImg = document.getElementById("hangman");
-//Börjar på 0 och räknas upp för varje fel bokstav, vilken av bilderna som kommer upp beroende på hur många fel du gjort
+//Börjar på 0 och räknas upp för varje fel bokstav, vilken av bilderna som kommer upp beroende på hur många fel man gjort
 let hangmanImgNr = 0;
-//Variabel för knappen du startar spelet med
+//Variabel för knappen man startar spelet med
 let startGameBtn;
 window.onload = init;
 // Funktion som körs då hela webbsidan är inladdad, dvs då all HTML-kod är utförd
@@ -47,13 +47,14 @@ function init() {
     activateStart();
   }
 } // End init
+
 //Funktion för att slumpa random ord!
 function randomGen() {
   selectedWord = wordList[
     Math.floor(Math.random() * wordList.length)
   ].toUpperCase();
-  console.log(selectedWord);
 }
+
 //Funktion som tar fram bokstävernas rutor, antal beror på ordets längd.
 function createInput() {
   for (let i = 0; i < selectedWord.length; i++) {
@@ -74,7 +75,7 @@ function buttonValue(event) {
   event.target.disabled = true;
   //Hämtar mina inputs och lägger dom i variabel
   let letterBoxInput = document.querySelectorAll("#letterBoxes input");
- //Gör en array bestående av det valda ordet.
+  //Gör en array bestående av det valda ordet.
   let wordArray = [...selectedWord];
   /*Om ordet inkluderar värdet av val knapp, loopa igenom alla mina inputs,
    om värdet av val knapp finns i indexet på min ordArray, då är input-value 
@@ -92,13 +93,13 @@ function buttonValue(event) {
         document.getElementById(
           "message"
         ).textContent = `Du har vunnit! Ordet var: ${selectedWord}`;
-        //Töm min array 
+        //Töm min array
         letterValue = [];
         //Rensa min ul
         let ul = document.getElementById("letterUL");
         ul.innerHTML = "";
       }
-    }// Kör min funktion för fel svar
+    } // Kör min funktion för fel svar
   } else {
     wrongAnswer();
   }
@@ -117,15 +118,14 @@ function wrongAnswer() {
     //Ta bort innehållet i min UL
     let ul = document.getElementById("letterUL");
     ul.innerHTML = "";
- //Töm min array 
- letterValue = [];
- //Skriv ut meddelande
+    //Töm min array
+    letterValue = [];
+    //Skriv ut meddelande
     document.getElementById(
       "message"
-    ).textContent = `Du är hängd! Ordet var: ${selectedWord}.`;
+    ).textContent = `Du är hängd! Ordet var: ${selectedWord}`;
   }
 }
-
 //Funktion för att disable:a mina knappar och enable:a startknappen
 function removeButton() {
   let removeButton = document.getElementsByClassName("btn btn--stripe");

@@ -7,6 +7,7 @@
 }
 
 body {
+  background-color: lightgrey;
   color: #666; 
   font-family: sans-serif;
   display: -webkit-box;
@@ -23,9 +24,9 @@ body {
 }
 
 header {
-  background-color: silver;
+  background-color: white;
   color: black;
-  border-bottom: 1px solid #666;
+  border-bottom: 1px solid black;
   -webkit-box-flex: 0;
   -webkit-flex: none;
   -ms-flex: none;
@@ -74,7 +75,7 @@ main > article > h2 {
 
 p {
   color: black;
-  text-align:center;
+  text-align: center;
 }
 
 ul {
@@ -82,8 +83,8 @@ ul {
 }
 
 footer {
-  background-color: silver;
-  border-top: 1px solid #666;
+  background-color: white;
+  border-top: 1px solid black;
   margin-top: 20px;
   padding-top: 30px;
   color: black;
@@ -122,7 +123,9 @@ footer {
 
 #letterBoxes input {
   border: 1px solid black;
-  color: #666;
+  background-color: white;
+  /* color: #666; */
+  color: black;
   font-size: 1.5em;
   font-weight: bold;
   line-height: 2em;
@@ -132,19 +135,39 @@ footer {
   width: 2em;
 }
 
+#letterUL {
+  text-align:center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:300px;
+
+}
+
+#placeholders {
+  justify-content: center;
+  text-align:center;
+  color: black;
+}
+
 #message {
   padding-top: 20px;
   font-size: 1.5em;
+  color: black;
+  text-align:center;
 }
 
 .btn {
   -moz-user-select: text;
-  background-color: #fff;
-  background: transparent;
+  background-color: #fff; 
   border-radius: 6px;
   border: 0;
   border: 2px solid black;
   color: #666;
+  color: black;
   cursor: pointer;
   display: block;
   font: inherit;
