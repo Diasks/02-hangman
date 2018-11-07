@@ -1,4 +1,4 @@
-// Lista med spelets alla ord
+// Lista med spelets alla ord.
 const wordList = [
   "Sol",
   "Träd",
@@ -15,103 +15,132 @@ const wordList = [
   "Spring",
   "Regn"
 ];
-// Ett av orden valt av en slumpgenerator
-let selectedWord = wordList[
-  Math.floor(Math.random() * wordList.length)
-].toUpperCase();
-//lägger valt ord i en array och splittrar ordet så det blir separata bokstäver.
-let arrSelectedWord = [];
-arrSelectedWord = selectedWord.split("");
+//Variabel för det valda ordet.
+let selectedWord;
 //Array bestående av rutorna där bokstäverna ska stå
-let letterBoxes = []; 
-//mitt html-element där bilden ligger - Bild som kommer vid fel svar
+let letterBoxes = [];
+//Mitt html-element där bilden ligger, bilden som kommer vid fel svar
 let hangmanImg = document.getElementById("hangman");
- //Börjar på 0 och räknas upp för varje fel bokstav // Vilken av bilderna som kommer upp beroende på hur många fel du gjort
+//Börjar på 0 och räknas upp för varje fel bokstav, vilken av bilderna som kommer upp beroende på hur många fel du gjort
 let hangmanImgNr = 0;
-// Knappen du startar spelet med
-let startGameBtn; 
+//Variabel för knappen du startar spelet med
+let startGameBtn;
 window.onload = init;
 // Funktion som körs då hela webbsidan är inladdad, dvs då all HTML-kod är utförd
 // Initiering av globala variabler samt koppling av funktioner till knapparna.
 function init() {
-  // Se till att init aktiveras då sidan är inladdad
   // När man klickar på knappen starta spel så anropas funktionen startTheGame
   startGameBtn = document.getElementById("startGameBtn");
   startGameBtn.addEventListener("click", startTheGame);
 
-  //funktionen startTheGame som i sin tur anropar funktionen ButtonValue och CreateInput.
-  function startTheGame(event) {
-    event.target.disabled = true;
+  /*Funktionen startTheGame som i sin tur anropar andra funktioner såsom 
+  buttonValue, createInput, randomGen & activateStart. Den rensar även gammalt innehåll*/
+  function startTheGame() {
     let alpaButton = document.getElementById("letterButtons");
     alpaButton.addEventListener("click", buttonValue);
+    hangmanImgNr = 0;
+    hangmanImg.src = `images/h0.png`;
+    document.getElementById("message").textContent = "";
+    document.getElementById("placeholders").innerHTML = "";
+    randomGen();
     createInput();
-    console.log(selectedWord);
-  };
-}; // End init
-
-// Funktionen som tar fram bokstävernas rutor, antal beror på vilket ord
-//skapa li-element där antalet rutor är beroende på längden av slumpat ord
+    activateStart();
+  }
+} // End init
+//Funktion för att slumpa random ord!
+function randomGen() {
+  selectedWord = wordList[
+    Math.floor(Math.random() * wordList.length)
+  ].toUpperCase();
+  console.log(selectedWord);
+}
+//Funktion som tar fram bokstävernas rutor, antal beror på ordets längd.
 function createInput() {
-  for (let i = 0; i < arrSelectedWord.length; i++) {
+  for (let i = 0; i < selectedWord.length; i++) {
     letterBoxes[i] = document.createElement("li");
-    letterBoxes[i].innerHTML = `<input type="text" disabled value="" />`;
+    letterBoxes[
+      i
+    ].innerHTML = `<input type="text" class="lista" disabled value="" />`;
     document.getElementById("letterUL").appendChild(letterBoxes[i]);
   }
-};
-//vill ha tag i mina inputs för att ändra value till vald bokstav.....
-//ligger efter hela tiden och visar inte bokstav......
-
+}
+//array för rätt bokstäver
+let letterValue = [];
 // Funktion som körs när du trycker på bokstäverna och gissar bokstav
 function buttonValue(event) {
-  //lägger value av vald knapp i letterButton och disable:ar vald boktav efter det.
+  //Lägger value av vald knapp i letterButton som sen används längre ner för att skriva ut fel bokstav
   letterButton = event.target.value;
+  //Disable:ar knapp efter tryck
   event.target.disabled = true;
-  //om letterButton finns i arrayen med valda ordet = true
-  if (arrSelectedWord.indexOf(letterButton) !== -1) {
-   //SKRIV UT BOKSTAVEEEEN I DE SKAPADE LETTERBOXES!!!
-
-    letterBoxes.innerHTML = letterButton;
-    letterBoxes.innerText = letterButton;
-    letterBoxes.textContent = letterButton;
-    letterBoxes.value = letterButton;
-
-    //var i ordet bokstaven finns där lägger den in bokstaven.
-    letterBoxes[arrSelectedWord.indexOf(letterButton)] = letterButton;
-    //om mina listelement när man slår ihop bokstäverna är det valda ordet så har personen vunnit!
-    if (letterBoxes.join("") == selectedWord) {
-      removeButton();
-      document.getElementById("message").textContent =
-        `Du har vunnit! Ordet var: ${selectedWord}`;
-      setTimeout(ActivateStart, 3000);
-    }
-  } //finns bokstaven inte i arrayen med valda ordet = true
-  else if (arrSelectedWord.indexOf(letterButton) == -1) {
-    //räkna upp från 0
-    hangmanImgNr++;
-    //ändra bild baserat på nummer av fel gissning.
-    hangmanImg.src = "images/h" + hangmanImgNr + ".png";
-    //skriv ut fel bokstäver
-    document.getElementById("placeholders").innerHTML += letterButton;
-    //om man har gissat fel 6 gånger skriv ett meddelande om att man har dött och vilket det rätta ordet var
-    if (hangmanImgNr == 6) {
-      removeButton();
-      setTimeout(ActivateStart, 3000);
-
-      document.getElementById("message").textContent =
-        `Du är hängd! Ordet var: ${selectedWord}.`;
-    }
-    console.log("finns inte!");
+  //Hämtar mina inputs och lägger dom i variabel
+  let letterBoxInput = document.querySelectorAll("#letterBoxes input");
+ //Gör en array bestående av det valda ordet.
+  let wordArray = [...selectedWord];
+  /*Om ordet inkluderar värdet av val knapp, loopa igenom alla mina inputs,
+   om värdet av val knapp finns i indexet på min ordArray, då är input-value 
+   lika med den bokstaven, pusha då bokstaven till min array */
+  if (selectedWord.includes(event.target.value)) {
+    for (var i = 0; i < letterBoxInput.length; i++) {
+      if (event.target.value === wordArray[i]) {
+        letterBoxInput[i].value = event.target.value;
+        letterValue.push(event.target.value);
+      } //Om bokstäverna när de sätts ihop är detsamma som ordet
+      if (letterValue.join("") === selectedWord) {
+        //Kör min removeButton funktion
+        removeButton();
+        //Skriv ut vinnarfras!
+        document.getElementById(
+          "message"
+        ).textContent = `Du har vunnit! Ordet var: ${selectedWord}`;
+        //Töm min array 
+        letterValue = [];
+        //Rensa min ul
+        let ul = document.getElementById("letterUL");
+        ul.innerHTML = "";
+      }
+    }// Kör min funktion för fel svar
+  } else {
+    wrongAnswer();
   }
-};
-// Funktion som inaktiverar/aktiverar bokstavsknapparna beroende på vilken del av spelet du är på
+}
+//Funktion för fel svar
+function wrongAnswer() {
+  //Öka numret för varje felgissning.
+  hangmanImgNr++;
+  //Ändra bild baserat på nummer av fel gissning.
+  hangmanImg.src = `images/h${hangmanImgNr}.png`;
+  //Skriv ut fel bokstäver
+  document.getElementById("placeholders").innerHTML += letterButton;
+  //Om man har gissat fel 6 gånger skriv ett meddelande om att man har dött och vilket det rätta ordet var
+  if (hangmanImgNr == 6) {
+    removeButton();
+    //Ta bort innehållet i min UL
+    let ul = document.getElementById("letterUL");
+    ul.innerHTML = "";
+ //Töm min array 
+ letterValue = [];
+ //Skriv ut meddelande
+    document.getElementById(
+      "message"
+    ).textContent = `Du är hängd! Ordet var: ${selectedWord}.`;
+  }
+}
+
+//Funktion för att disable:a mina knappar och enable:a startknappen
 function removeButton() {
   let removeButton = document.getElementsByClassName("btn btn--stripe");
   for (var j = 0; j < removeButton.length; j++) {
     removeButton[j].disabled = true;
+  } //För att enable:a startknappen
+  startGame = document.getElementById("startGameBtn");
+  startGame.disabled = false;
+}
+// Funktion som enable:ar mina knappar och disable:ar startknappen
+function activateStart() {
+  let enableButton = document.getElementsByClassName("btn btn--stripe");
+  for (var j = 0; j < enableButton.length; j++) {
+    enableButton[j].disabled = false;
   }
-};
-// Funktionen ropas vid vinst eller förlust, gör olika saker beroende av det
-
-function ActivateStart() {
-  location.reload();
-};
+  startGame = document.getElementById("startGameBtn");
+  startGame.disabled = true;
+}
